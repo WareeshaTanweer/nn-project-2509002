@@ -61,6 +61,21 @@ docker run --rm -v "%cd%\data:/app/data" -v "%cd%\models:/app/models" nn-test
 
 This loads the saved model, runs it on the 750-image test set and prints the metrics. The test image only contains what is needed for inference. It can be run on a different machine from the one used for training: copy the project, `models/` and `data/` folders there, then build and run.
 
+### Option: run the test image directly from Docker Hub
+
+No build needed. Clone this repository (for the `data` and `models` folders), then run:
+
+```
+docker pull wareeshatanweer/nn-test:latest
+docker run --rm -v "%cd%\data:/app/data" -v "%cd%\models:/app/models" wareeshatanweer/nn-test:latest
+```
+
+To predict on a single image with the Docker Hub image:
+
+```
+docker run --rm --entrypoint python -v "%cd%\models:/app/models" -v "%cd%\occupied_1.jpg:/app/occupied_1.jpg" wareeshatanweer/nn-test:latest src/predict.py occupied_1.jpg
+```
+
 ## 3. Predict on a new image
 
 ```
