@@ -1,0 +1,7 @@
+FROM python:3.13-slim
+WORKDIR /app
+COPY requirements-test.txt .
+RUN pip install --no-cache-dir -r requirements-test.txt --extra-index-url https://download.pytorch.org/whl/cpu
+COPY src/test.py src/predict.py src/model.py src/dataset.py ./src/
+ENV PYTHONUNBUFFERED=1
+CMD ["python", "src/test.py"]
